@@ -71,6 +71,92 @@
 // 8 4 2 4
 // 5 2 6 7
 // Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
+// int InputNum(string message)
+// {
+//     Console.Write(message);
+//     return Convert.ToInt32(Console.ReadLine()!);
+// }
+// int[,] Create2DArray(int rows, int columns)
+// {
+//     return new int[rows, columns];
+// }
+// void Fill2DArray(int[,] array, int min, int max)
+// {
+//     Random rnd = new Random();
+//     for (int i = 0; i < array.GetLength(0); i++)
+//         for (int j = 0; j < array.GetLength(1); j++)
+//             array[i, j] = rnd.Next(min, max + 1);
+// }
+// void Print2DArray(int[,] array)
+// {
+//     for (int i = 0; i < array.GetLength(0); i++)
+//     {
+//         for (int j = 0; j < array.GetLength(1); j++)
+//             Console.Write($"{array[i, j]}\t");
+//         Console.WriteLine();
+//     }
+// }
+// int[] SumRowsOf2DArray(int[,] array) 
+// // Массив из сумм элементов строк двухмерного массива, где индексы одномерного массива - номера строк двухмерного массива.
+// {
+//     int [] sumRows = new int [array.GetLength(0)];
+//     for (int i = 0; i < array.GetLength(0); i++)
+//     {
+//         int sum = 0;
+//         for (int j = 0; j < array.GetLength(1); j++)
+//         {
+//             sum += array[i,j];
+//         }
+//         sumRows[i] = sum;
+//     }
+//     return sumRows;
+// }
+// void PrintArray (int[] array2)
+// {
+//     for (int i = 0; i < array2.Length; i++)
+//     {
+//         Console.Write(array2[i] + " ");
+//     }
+// }
+// int FindMaximum (int [] array3)
+// {
+//     int max = array3[0];
+//     int indexMax = 0;
+//     for (int i = 1; i < array3.Length; i++)
+//     {
+//         if (array3 [i] > max) 
+//         {
+//             max = array3[i];
+//             indexMax = i;
+//         }       
+//     }
+//     return indexMax;
+// }
+
+
+// int rows = InputNum("Введите количество строк: ");
+// int cols = InputNum("Введите количество столбцов: ");
+// int minValue = InputNum("Введите минимальное значение элемента: ");
+// int maxValue = InputNum("Введите максимальное значение элемента: ");
+// int[,] myArray = Create2DArray(rows, cols);
+// Fill2DArray(myArray, minValue, maxValue);
+// Print2DArray(myArray);
+// Console.WriteLine();
+// int [] arrayOfSums = SumRowsOf2DArray(myArray);
+// // для проверки печатаем получившийся массив.
+// PrintArray(arrayOfSums);
+// Console.WriteLine();
+// int rowOfMaxSum = FindMaximum(arrayOfSums);
+// Console.WriteLine($"Первая максимальная сумма элементов в {rowOfMaxSum + 1} строке.");
+
+
+// Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
+// Например, даны 2 матрицы:
+// 2 4 | 3 4
+// 3 2 | 3 3
+// Результирующая матрица будет:
+// 18 20
+// 15 18
 int InputNum(string message)
 {
     Console.Write(message);
@@ -96,67 +182,55 @@ void Print2DArray(int[,] array)
         Console.WriteLine();
     }
 }
-int[] SumRowsOf2DArray(int[,] array) 
-// Массив из сумм элементов строк двухмерного массива, где индексы одномерного массива - номера строк двухмерного массива.
+int[,] MultiplicationsOf2DArrays(int[,] array1, int[,] array2)
+// Массив из сумм элементов строк одного двухмерного массива, умноженных на элементы столбцов второго двухмерного массива.
+// Умножение возможно только, если количество столбцов первой матрицы равно количеству строк второй матрицы.
 {
-    int [] sumRows = new int [array.GetLength(0)];
-    for (int i = 0; i < array.GetLength(0); i++)
+    int[,] multiArray = new int[array1.GetLength(0), array2.GetLength(1)];
+    for (int i = 0; i < array1.GetLength(0); i++)
     {
-        int sum = 0;
-        for (int j = 0; j < array.GetLength(1); j++)
+        for (int j = 0; j < array2.GetLength(1); j++)
         {
-            sum += array[i,j];
+            multiArray[i, j] = 0;
+            for (int x = 0; x < array1.GetLength(1); x++)
+            {
+                multiArray[i, j] += array1[i, x] * array2[x, j];
+            }
         }
-        sumRows[i] = sum;
     }
-    return sumRows;
+    return multiArray;
 }
-void PrintArray (int[] array2)
+
+void Check(int[,] array1, int[,] array2, int columns1, int rows2)
 {
-    for (int i = 0; i < array2.Length; i++)
+    if (columns1 != rows2) Console.WriteLine("Умножение матриц невозможно.");
+    else
     {
-        Console.Write(array2[i] + " ");
+        Console.WriteLine("Произведением двух матриц будет: ");
+        int[,] result = MultiplicationsOf2DArrays(array1, array2);
+        Print2DArray(result);
     }
 }
-int FindMaximum (int [] array3)
-{
-    int max = array3[0];
-    int indexMax = 0;
-    for (int i = 1; i < array3.Length; i++)
-    {
-        if (array3 [i] > max) 
-        {
-            max = array3[i];
-            indexMax = i;
-        }       
-    }
-    return indexMax;
-}
-
-
-int rows = InputNum("Введите количество строк: ");
-int cols = InputNum("Введите количество столбцов: ");
-int minValue = InputNum("Введите минимальное значение элемента: ");
-int maxValue = InputNum("Введите максимальное значение элемента: ");
-int[,] myArray = Create2DArray(rows, cols);
-Fill2DArray(myArray, minValue, maxValue);
-Print2DArray(myArray);
+int rows1 = InputNum("Введите количество строк для первого массива: ");
+int cols1 = InputNum("Введите количество столбцов для первого массива: ");
+int minValue1 = InputNum("Введите минимальное значение элемента для первого массива: ");
+int maxValue1 = InputNum("Введите максимальное значение элемента для первого массива: ");
+int[,] myArray1 = Create2DArray(rows1, cols1);
+Fill2DArray(myArray1, minValue1, maxValue1);
 Console.WriteLine();
-int [] arrayOfSums = SumRowsOf2DArray(myArray);
-// для проверки печатаем получившийся массив.
-PrintArray(arrayOfSums);
+int rows2 = InputNum("Введите количество строк для второго массива: ");
+int cols2 = InputNum("Введите количество столбцов для второго массива: ");
+int minValue2 = InputNum("Введите минимальное значение элемента для второго массива: ");
+int maxValue2 = InputNum("Введите максимальное значение элемента для второго массива: ");
+int[,] myArray2 = Create2DArray(rows2, cols2);
+Fill2DArray(myArray2, minValue2, maxValue2);
+Print2DArray(myArray1);
 Console.WriteLine();
-int rowOfMaxSum = FindMaximum(arrayOfSums);
-Console.WriteLine($"Первая максимальная сумма элементов в {rowOfMaxSum + 1} строке.");
+Print2DArray(myArray2);
+Console.WriteLine();
+Check(myArray1, myArray2, cols1, rows2);
 
 
-// Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
-// Например, даны 2 матрицы:
-// 2 4 | 3 4
-// 3 2 | 3 3
-// Результирующая матрица будет:
-// 18 20
-// 15 18
 
 // Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
 // Массив размером 2 x 2 x 2
