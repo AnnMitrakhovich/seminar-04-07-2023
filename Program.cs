@@ -237,91 +237,91 @@
 // 34(1,0,0) 41(1,1,0)
 // 27(0,0,1) 90(0,1,1)
 // 26(1,0,1) 55(1,1,1)
-int InputNum(string message)
-{
-    Console.Write(message);
-    return int.Parse(Console.ReadLine()!);
-}
-int[] AvalibleDigits()
-{
-    int[] digits = new int[90];
-    digits[0] = 10;
-    for (int i = 1; i < 90; i++)
-    {
-        digits[i] = digits[i - 1] + 1;
-    }
-    return digits;
-}
-int [] RandomDigits(int [] array1)
-{
-    Random rnd = new Random();
-    int index = 0;
-    int temp = array1[0];
-    for (int i = 0; i < array1.Length/2; i++)
-    {
-        index = rnd.Next(0,90);
-        temp = array1[index];
-        array1[index] = array1[i];
-        array1[i] = temp;
-    }
-    return array1;
-}
-void PrintArray(int[] array2)
-{
-    for (int i = 0; i < array2.Length; i++)
-    {
-        Console.Write(array2[i] + " ");
-    }
-}
-int[,,] Create3DArray(int x, int y, int z)
-{
-    return new int[x, y, z];
-}
-void Fill3DArray(int[,,] array, int[] numbers)
-{
-    int index = 0;
-    if (index < 90)
-    {
-    for (int x = 0; x < array.GetLength(0); x++)
-        for (int y = 0; y < array.GetLength(1); y++)
-            for (int z = 0; z < array.GetLength(2); z++)
-            {
-               array[x, y, z] = numbers[index];
-                   index ++;                
-            }
-    }
-    else Console.WriteLine("Далее числа будут повторяться.");
-}
-void Print3DArray(int[,,] array)
-{
-    for (int x = 0; x < array.GetLength(0); x++)
-    {
-        for (int y = 0; y < array.GetLength(1); y++)
-        {
-            for (int z = 0; z < array.GetLength(2); z++)
-            {
-                Console.Write($"{array[x, y, z]} ({x}, {y}, {z})\t");
-            }
-        }
-    }
+// int InputNum(string message)
+// {
+//     Console.Write(message);
+//     return int.Parse(Console.ReadLine()!);
+// }
+// int[] AvalibleDigits()
+// {
+//     int[] digits = new int[90];
+//     digits[0] = 10;
+//     for (int i = 1; i < 90; i++)
+//     {
+//         digits[i] = digits[i - 1] + 1;
+//     }
+//     return digits;
+// }
+// int [] RandomDigits(int [] array1)
+// {
+//     Random rnd = new Random();
+//     int index = 0;
+//     int temp = array1[0];
+//     for (int i = 0; i < array1.Length/2; i++)
+//     {
+//         index = rnd.Next(0,90);
+//         temp = array1[index];
+//         array1[index] = array1[i];
+//         array1[i] = temp;
+//     }
+//     return array1;
+// }
+// void PrintArray(int[] array2)
+// {
+//     for (int i = 0; i < array2.Length; i++)
+//     {
+//         Console.Write(array2[i] + " ");
+//     }
+// }
+// int[,,] Create3DArray(int x, int y, int z)
+// {
+//     return new int[x, y, z];
+// }
+// void Fill3DArray(int[,,] array, int[] numbers)
+// {
+//     int index = 0;
+//     if (index < 90)
+//     {
+//     for (int x = 0; x < array.GetLength(0); x++)
+//         for (int y = 0; y < array.GetLength(1); y++)
+//             for (int z = 0; z < array.GetLength(2); z++)
+//             {
+//                array[x, y, z] = numbers[index];
+//                    index ++;                
+//             }
+//     }
+//     else Console.WriteLine("Далее числа будут повторяться.");
+// }
+// void Print3DArray(int[,,] array)
+// {
+//     for (int x = 0; x < array.GetLength(0); x++)
+//     {
+//         for (int y = 0; y < array.GetLength(1); y++)
+//         {
+//             for (int z = 0; z < array.GetLength(2); z++)
+//             {
+//                 Console.Write($"{array[x, y, z]} ({x}, {y}, {z})\t");
+//             }
+//         }
+//     }
 
-    Console.WriteLine();
-}
+//     Console.WriteLine();
+// }
 
-int rows = InputNum("Введите длину: ");
-int cols = InputNum("Введите ширину: ");
-int z = InputNum("Введите глубину: ");
-Console.WriteLine();
-int[] numbersArray = AvalibleDigits();
-PrintArray(numbersArray);
-Console.WriteLine();
-int[] newNumberArray = RandomDigits(numbersArray);
-PrintArray(newNumberArray);
-Console.WriteLine();
-int[,,] myArray = Create3DArray(rows, cols, z);
-Fill3DArray(myArray, newNumberArray);
-Print3DArray(myArray);
-Console.WriteLine();
+// int rows = InputNum("Введите длину: ");
+// int cols = InputNum("Введите ширину: ");
+// int z = InputNum("Введите глубину: ");
+// Console.WriteLine();
+// int[] numbersArray = AvalibleDigits();
+// PrintArray(numbersArray);
+// Console.WriteLine();
+// int[] newNumberArray = RandomDigits(numbersArray);
+// PrintArray(newNumberArray);
+// Console.WriteLine();
+// int[,,] myArray = Create3DArray(rows, cols, z);
+// Fill3DArray(myArray, newNumberArray);
+// Print3DArray(myArray);
+// Console.WriteLine();
 
 // Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
 // Например, на выходе получается вот такой массив:
@@ -329,6 +329,101 @@ Console.WriteLine();
 // 12 13 14 05
 // 11 16 15 06
 // 10 09 08 07
+int InputNum(string message)
+{
+    Console.Write(message);
+    return Convert.ToInt32(Console.ReadLine()!);
+}
+int[,] Create2DArray(int rows, int columns)
+{
+    return new int[rows, columns];
+}
+void Fill2DArray(int[,] array, int m, int n)
+{
+    // заполняем периметр числами
+    int count = 1;
+    for (int i = 0; i < n; i++)
+    {
+        array[0, i] = count;
+        count++;
+    }
+    for (int j = 1; j < m; j++)
+
+    {
+        array[j, n - 1] = count;
+        count++;
+    }
+
+    for (int x = n - 2; x >= 0; --x)
+    {
+        array[m - 1, x] = count;
+        count++;
+    }
+    for (int y = m - 2; y > 0; --y)
+    {
+        array[y, 0] = count;
+        count++;
+    }
+    // заполняем внутри квадратика числа
+    int c = 1;
+    int d = 1;
+    while (count < m * n)
+    {
+        while (array[c, d + 1] == 0)
+        {
+            array[c, d] = count;
+            d++;
+            count++;
+        }
+        while (array[c + 1, d] == 0)
+        {
+            array[c, d] = count;
+            c++;
+            count++;
+        }
+        while (array[c, d - 1] == 0)
+        {
+            array[c, d] = count;
+            d--;
+            count++;
+        }
+        while (array[c - 1, d] == 0)
+        {
+            array[c, d] = count;
+            c--;
+            count++;
+        }
+    }
+    //  убираем последний 0
+    for (int z = 0; z < m; z++)
+    {
+        for (int s = 0; s < n; s++)
+        {
+            if (array[z, s] == 0) array[z, s] = count;
+        }
+    }
+}
+void Print2DArray(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            if (array[i,j] < 10) Console.Write($"0{array[i, j]}\t");
+            else
+            {
+                Console.Write($"{array[i, j]}\t");
+            }
+        }
+
+        Console.WriteLine();
+    }
+}
+int rows = InputNum("Введите количество строк: ");
+int cols = InputNum("Введите количество столбцов: ");
+int[,] myArray = Create2DArray(rows, cols);
+Fill2DArray(myArray, rows, cols);
+Print2DArray(myArray);
 
 // Задайте двумерный массив из целых чисел. Напишите программу, 
 // которая удалит строку и столбец, на пересечении которых расположен наименьший элемент массива.
